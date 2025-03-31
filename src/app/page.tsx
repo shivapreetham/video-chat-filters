@@ -1,6 +1,5 @@
 'use client'
 import { useState } from 'react'
-import Head from 'next/head'
 import CameraStream from '@/components/CameraStream'
 import SoundBoard from '@/components/SoundBoard'
 
@@ -9,14 +8,6 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Go West</title>
-        <meta
-          name="description"
-          content="Nina West is the kindness in all of us, see it for yourself here. Made by the Coding Queen: Anna Lytical"
-        />
-        <link rel="shortcut icon" href="/nina-faces/neutral0.png" />
-      </Head>
       <main className="container mx-auto p-4">
         <h1 className="text-4xl font-bold text-center">
           Go big. Be Kind.<br />Go West.

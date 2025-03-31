@@ -1,32 +1,30 @@
-// app/page.tsx
 'use client'
-
 import { useState } from 'react'
 import Head from 'next/head'
 import CameraStream from '@/components/CameraStream'
-import SoundBoard, { ExpressionContext } from '@/components/SoundBoard'
+import SoundBoard from '@/components/SoundBoard'
 
 export default function Home() {
-  // Create a state to share between components
-  const [currentExpression, setCurrentExpression] = useState("neutral0");
+  const [currentMask, setCurrentMask] = useState('/nina-faces/neutral0.png') // Default mask
 
   return (
     <>
-      
+      <Head>
+        <title>Go West</title>
+        <meta
+          name="description"
+          content="Nina West is the kindness in all of us, see it for yourself here. Made by the Coding Queen: Anna Lytical"
+        />
+        <link rel="shortcut icon" href="/nina-faces/neutral0.png" />
+      </Head>
       <main className="container mx-auto p-4">
-        <h1 className="text-4xl font-bold text-center mb-6">
+        <h1 className="text-4xl font-bold text-center">
           Go big. Be Kind.<br />Go West.
         </h1>
-        
         <div id="video-container" className="relative mt-4 max-w-lg mx-auto">
-          {/* Provide the expression setter to the CameraStream */}
-          <CameraStream initialExpression={currentExpression} onExpressionChange={setCurrentExpression} />
+          <CameraStream mask={currentMask} />
         </div>
-        
-        {/* Provide the expression setter to the SoundBoard via context */}
-        <ExpressionContext.Provider value={setCurrentExpression}>
-          <SoundBoard />
-        </ExpressionContext.Provider>
+        <SoundBoard setMask={setCurrentMask} />
       </main>
     </>
   )

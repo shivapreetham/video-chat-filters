@@ -1,109 +1,83 @@
 'use client'
-
-import React, { useContext, createContext } from 'react'
-
-// Create a context for expression updates
-export const ExpressionContext = createContext<(expression: string) => void>(() => {});
+import React from 'react'
 
 interface SoundButtonProps {
   sound: string
-  mood: string
-  imageName: string
+  imgSrc: string
   alt: string
-  onPlay: (sound: string, mood: string, imageName: string) => void
+  onPlay: (sound: string, imgSrc: string) => void
 }
 
-const SoundButton: React.FC<SoundButtonProps> = ({ sound, mood, imageName, alt, onPlay }) => (
-  <div 
-    onClick={() => onPlay(sound, mood, imageName)} 
-    className="cursor-pointer m-2 transition-transform hover:scale-110"
-  >
-    <img 
-      src={`/nina-faces/${imageName}.png`} 
-      alt={alt} 
-      className="w-16 h-16 rounded-full shadow-md" 
-    />
+const SoundButton: React.FC<SoundButtonProps> = ({ sound, imgSrc, alt, onPlay }) => (
+  <div onClick={() => onPlay(sound, imgSrc)} className="cursor-pointer m-2">
+    <img src={imgSrc} alt={alt} className="w-16 h-16" />
   </div>
 )
 
-const SoundBoard: React.FC = () => {
-  // We'll need a way to access the setExpression function from CameraStream
-  // This will be set up in the parent component
-  const setExpression = useContext(ExpressionContext);
+interface SoundBoardProps {
+  setMask: (mask: string) => void
+}
 
-  const playSound = (sound: string, mood: string, imageName: string) => {
-    // Play the audio
-    const audio = new Audio(`/sounds/${sound}.mp3`);
-    audio.play().catch(error => {
-      console.error("Error playing sound:", error);
-    });
-    
-    // Update the expression/filter
-    setExpression(imageName);
+const SoundBoard: React.FC<SoundBoardProps> = ({ setMask }) => {
+  const playSound = (sound: string, imgSrc: string) => {
+    const audio = new Audio(`/sounds/${sound}.mp3`)
+    audio.play()
+    setMask(imgSrc) // Update the mask when the sound plays
   }
 
   return (
     <div className="sound-buttons grid grid-cols-3 gap-4 justify-items-center mt-4">
       <SoundButton
         sound="cheeseplate"
-        mood="angry"
-        imageName="angry0"
+        imgSrc="/nina-faces/angry0.png"
         alt="Angry face"
         onPlay={playSound}
       />
       <SoundButton
         sound="melons"
-        mood="angry"
-        imageName="angry1"
+        imgSrc="/nina-faces/angry1.png"
         alt="Angry face in sailor hat"
         onPlay={playSound}
       />
       <SoundButton
         sound="testify"
-        mood="happy"
-        imageName="happy0"
+        imgSrc="/nina-faces/happy0.png"
         alt="Happy face with grey wig"
         onPlay={playSound}
       />
       <SoundButton
         sound="kmart"
-        mood="disgusted"
-        imageName="disgusted0"
+        imgSrc="/nina-faces/disgusted0.png"
         alt="Disgusted face"
         onPlay={playSound}
       />
       <SoundButton
         sound="gowest"
-        mood="neutral"
-        imageName="neutral0"
+        imgSrc="/nina-faces/neutral0.png"
         alt="Neutral face"
         onPlay={playSound}
       />
       <SoundButton
         sound="elevengendary"
-        mood="happy"
-        imageName="happy2"
+        imgSrc="/nina-faces/happy2.png"
         alt="Happy face with entrance look"
         onPlay={playSound}
       />
       <SoundButton
         sound="seemymom"
-        mood="sad"
-        imageName="sad0"
+        imgSrc="/nina-faces/sad0.png"
         alt="Sad face"
         onPlay={playSound}
       />
       <SoundButton
         sound="gloryholes"
-        mood="surprised"
-        imageName="surprised1"
+        imgSrc="/nina-faces/surprised1.png"
         alt="Surprised face"
         onPlay={playSound}
       />
       <SoundButton
         sound="tryingmary"
-        mood="surprised"
-        imageName="surprised0"
+        imgSrc="/nina-faces/surprised0.png"
         alt="Shocked face"
         onPlay={playSound}
       />

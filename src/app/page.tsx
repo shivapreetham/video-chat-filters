@@ -4,7 +4,7 @@ import CameraStream from '@/components/CameraStream'
 import SoundBoard from '@/components/SoundBoard'
 
 export default function Home() {
-  const [currentMask, setCurrentMask] = useState('/nina-faces/neutral0.png') // Default mask
+  const [currentMask, setCurrentMask] = useState('/nina-faces/neutral0.png') 
 
   return (
     <>
